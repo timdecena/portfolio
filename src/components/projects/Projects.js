@@ -30,20 +30,23 @@ const Projects = () => {
         />
         <ProjectsCard
           title="Sinesugbowatch"
-          des=" Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-              Explicabo quibusdam voluptate sapiente voluptatibus harum quidem!"
+          des="A streaming platform inspired by Netflix, Sinesugbowatch allows users to explore, watch, 
+          and enjoy a wide variety of movies and shows with a modern and user-friendly interface."
+
           src={projectThree}
         />
         <ProjectsCard
           title="Study Buddy"
-          des=" Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-              Explicabo quibusdam voluptate sapiente voluptatibus harum quidem!"
+          des="A Django-based platform that connects students with nearby tutors, allowing them to book 
+          classes or arrange personal meetups with ease."
+
           src={projectFive}
         />
         <ProjectsCard
           title="Vocabventure"
-          des=" Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-              Explicabo quibusdam voluptate sapiente voluptatibus harum quidem!"
+          des="A gamified learning app designed for Grade 7 students at CIT, focusing on spelling
+           and vocabulary through fun and interactive challenges."
+
           src={projectFour}
         />
 
