@@ -1,6 +1,7 @@
-import React,{useState} from 'react'
-import Title from '../layouts/Title';
-import ContactLeft from './ContactLeft';
+import React, { useState } from "react";
+import Title from "../layouts/Title";
+import ContactLeft from "./ContactLeft";
+import emailjs from "emailjs-com";
 
 const Contact = () => {
   const [username, setUsername] = useState("");
@@ -21,6 +22,7 @@ const Contact = () => {
 
   const handleSend = (e) => {
     e.preventDefault();
+
     if (username === "") {
       setErrMsg("Username is required!");
     } else if (phoneNumber === "") {
@@ -30,21 +32,46 @@ const Contact = () => {
     } else if (!emailValidation(email)) {
       setErrMsg("Give a valid Email!");
     } else if (subject === "") {
-      setErrMsg("Plese give your Subject!");
+      setErrMsg("Please give your Subject!");
     } else if (message === "") {
       setErrMsg("Message is required!");
     } else {
-      setSuccessMsg(
-        `Thank you dear ${username}, Your Messages has been sent Successfully!`
-      );
-      setErrMsg("");
-      setUsername("");
-      setPhoneNumber("");
-      setEmail("");
-      setSubject("");
-      setMessage("");
+      // ✅ Send email via EmailJS
+      emailjs
+        .send(
+          "service_spgzx8v", // your Service ID
+          "template_2pki9ue", // your Template ID
+          {
+            name: username,
+            phone: phoneNumber,
+            email: email,
+            title: subject,
+            message: message,
+            time: new Date().toLocaleString(), // optional extra variable
+          },
+          "2uUiCZVa803vwxzoD" // your Public Key
+        )
+        .then(
+          (response) => {
+            console.log("SUCCESS!", response.status, response.text);
+            setSuccessMsg(
+              `Thank you dear ${username}, Your message has been sent successfully!`
+            );
+            setErrMsg("");
+            setUsername("");
+            setPhoneNumber("");
+            setEmail("");
+            setSubject("");
+            setMessage("");
+          },
+          (err) => {
+            console.error("FAILED...", err);
+            setErrMsg("Something went wrong. Please try again.");
+          }
+        );
     }
   };
+
   return (
     <section
       id="contact"
@@ -57,7 +84,10 @@ const Contact = () => {
         <div className="w-full h-auto flex flex-col lgl:flex-row justify-between">
           <ContactLeft />
           <div className="w-full lgl:w-[60%] h-full py-10 bg-gradient-to-r from-[#1e2024] to-[#23272b] flex flex-col gap-8 p-4 lgl:p-8 rounded-lg shadow-shadowOne">
-            <form className="w-full flex flex-col gap-4 lgl:gap-6 py-2 lgl:py-5">
+            <form
+              onSubmit={handleSend}
+              className="w-full flex flex-col gap-4 lgl:gap-6 py-2 lgl:py-5"
+            >
               {errMsg && (
                 <p className="py-3 bg-gradient-to-r from-[#1e2024] to-[#23272b] shadow-shadowOne text-center text-orange-500 text-base tracking-wide animate-bounce">
                   {errMsg}
@@ -120,7 +150,7 @@ const Contact = () => {
                   onChange={(e) => setSubject(e.target.value)}
                   value={subject}
                   className={`${
-                    errMsg === "Plese give your Subject!" &&
+                    errMsg === "Please give your Subject!" &&
                     "outline-designColor"
                   } contactInput`}
                   type="text"
@@ -142,28 +172,18 @@ const Contact = () => {
               </div>
               <div className="w-full">
                 <button
-                  onClick={handleSend}
+                  type="submit"
                   className="w-full h-12 bg-[#141518] rounded-lg text-base text-gray-400 tracking-wider uppercase hover:text-white duration-300 hover:border-[1px] hover:border-designColor border-transparent"
                 >
                   Send Message
                 </button>
               </div>
-              {errMsg && (
-                <p className="py-3 bg-gradient-to-r from-[#1e2024] to-[#23272b] shadow-shadowOne text-center text-orange-500 text-base tracking-wide animate-bounce">
-                  {errMsg}
-                </p>
-              )}
-              {successMsg && (
-                <p className="py-3 bg-gradient-to-r from-[#1e2024] to-[#23272b] shadow-shadowOne text-center text-green-500 text-base tracking-wide animate-bounce">
-                  {successMsg}
-                </p>
-              )}
             </form>
           </div>
         </div>
       </div>
     </section>
   );
-}
+};
 
-export default Contact
+export default Contact;

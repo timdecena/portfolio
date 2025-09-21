@@ -75,6 +75,7 @@ const Navbar = () => {
                   Find me in
                 </h2>
                 <div className="flex gap-4">
+                  
                   <span className="bannerIcon">
                     <FaFacebookF />
                   </span>

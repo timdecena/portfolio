@@ -1,6 +1,6 @@
 import React from 'react'
 import Title from '../layouts/Title'
-import { projectOne, projectTwo, projectThree } from "../../assets/index";
+import { projectOne, projectTwo, projectThree,projectFour,projectFive } from "../../assets/index";
 import ProjectsCard from './ProjectsCard';
 
 const Projects = () => {
@@ -17,41 +17,36 @@ const Projects = () => {
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 xl:gap-14">
         <ProjectsCard
-          title="SOCIAL MEDIA CLONE"
-          des=" Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-              Explicabo quibusdam voluptate sapiente voluptatibus harum quidem!"
+          title="Whiskerwatch"
+          des="WhiskerWatch is a lost-and-found and pet adoption system that helps connect pets with owners and new families. Users can report lost pets, find adoptable animals, 
+          and stay connected through an easy-to-use platform."
           src={projectOne}
         />
         <ProjectsCard
-          title="E-commerce Website"
-          des=" Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-              Explicabo quibusdam voluptate sapiente voluptatibus harum quidem!"
+          title="Sugdone"
+          des="SugDone is a reminder and to-do app that helps users organize tasks and stay on track. It lets you set reminders, 
+          manage to-do lists, and boost daily productivity with ease."
           src={projectTwo}
         />
         <ProjectsCard
-          title="Chatting App"
+          title="Sinesugbowatch"
           des=" Lorem, ipsum dolor sit amet consectetur adipisicing elit.
               Explicabo quibusdam voluptate sapiente voluptatibus harum quidem!"
           src={projectThree}
         />
         <ProjectsCard
-          title="SOCIAL MEDIA CLONE"
+          title="Study Buddy"
           des=" Lorem, ipsum dolor sit amet consectetur adipisicing elit.
               Explicabo quibusdam voluptate sapiente voluptatibus harum quidem!"
-          src={projectThree}
+          src={projectFive}
         />
         <ProjectsCard
-          title="E-commerce Website"
+          title="Vocabventure"
           des=" Lorem, ipsum dolor sit amet consectetur adipisicing elit.
               Explicabo quibusdam voluptate sapiente voluptatibus harum quidem!"
-          src={projectOne}
+          src={projectFour}
         />
-        <ProjectsCard
-          title="Chatting App"
-          des=" Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-              Explicabo quibusdam voluptate sapiente voluptatibus harum quidem!"
-          src={projectTwo}
-        />
+
       </div>
     </section>
   );
