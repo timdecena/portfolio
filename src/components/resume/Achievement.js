@@ -36,12 +36,6 @@ const Achievement = () => {
             des="Participated in the AWS Community Day Cebu Roadshow 2023, gaining insights into the latest AWS technologies and cloud solutions."
           />
           
-          <ResumeCard
-            title="CAT Officer"
-            subTitle="2019"
-            result="Leadership"
-            des="Served as a Citizen Army Training (CAT) Officer, developing leadership, discipline, and teamwork skills."
-          />
         </div>
       </div>
 

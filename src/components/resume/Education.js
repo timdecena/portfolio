@@ -52,7 +52,7 @@ const Education = () => {
           />
           <ResumeCard
             title="ESL Teacher"
-            subTitle="Acadsoc (May - September 2025)"
+            subTitle="Acadsoc (April - October 2025)"
             result="Part Time"
             des="Taught English as a Second Language to international students through Acadsoc. Focused on improving speaking, listening, reading, and writing skills with engaging and interactive lessons."
           />
