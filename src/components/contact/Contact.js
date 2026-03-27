@@ -1,7 +1,10 @@
 import React, { useState } from "react";
-import Title from "../layouts/Title";
+import emailjs from "@emailjs/browser";
+import SectionHeading from "../common/SectionHeading";
 import ContactLeft from "./ContactLeft";
-import emailjs from "emailjs-com";
+import Reveal from "../motion/Reveal";
+import { Button } from "../ui/button";
+import { Card, CardContent } from "../ui/card";
 
 const Contact = () => {
   const [username, setUsername] = useState("");
@@ -12,178 +15,178 @@ const Contact = () => {
   const [errMsg, setErrMsg] = useState("");
   const [successMsg, setSuccessMsg] = useState("");
 
-  // ========== Email Validation start here ==============
   const emailValidation = () => {
     return String(email)
-      .toLocaleLowerCase()
+      .toLowerCase()
       .match(/^\w+([-]?\w+)*@\w+([-]?\w+)*(\.\w{2,3})+$/);
   };
-  // ========== Email Validation end here ================
 
-  const handleSend = (e) => {
-    e.preventDefault();
+  const handleSend = async (event) => {
+    event.preventDefault();
 
     if (username === "") {
       setErrMsg("Username is required!");
-    } else if (phoneNumber === "") {
+      return;
+    }
+    if (phoneNumber === "") {
       setErrMsg("Phone number is required!");
-    } else if (email === "") {
+      return;
+    }
+    if (email === "") {
       setErrMsg("Please give your Email!");
-    } else if (!emailValidation(email)) {
+      return;
+    }
+    if (!emailValidation(email)) {
       setErrMsg("Give a valid Email!");
-    } else if (subject === "") {
+      return;
+    }
+    if (subject === "") {
       setErrMsg("Please give your Subject!");
-    } else if (message === "") {
+      return;
+    }
+    if (message === "") {
       setErrMsg("Message is required!");
-    } else {
-      // ✅ Send email via EmailJS
-      emailjs
-        .send(
-          "service_spgzx8v", // your Service ID
-          "template_2pki9ue", // your Template ID
-          {
-            name: username,
-            phone: phoneNumber,
-            email: email,
-            title: subject,
-            message: message,
-            time: new Date().toLocaleString(), // optional extra variable
-          },
-          "2uUiCZVa803vwxzoD" // your Public Key
-        )
-        .then(
-          (response) => {
-            console.log("SUCCESS!", response.status, response.text);
-            setSuccessMsg(
-              `Thank you dear ${username}, Your message has been sent successfully!`
-            );
-            setErrMsg("");
-            setUsername("");
-            setPhoneNumber("");
-            setEmail("");
-            setSubject("");
-            setMessage("");
-          },
-          (err) => {
-            console.error("FAILED...", err);
-            setErrMsg("Something went wrong. Please try again.");
-          }
-        );
+      return;
+    }
+
+    try {
+      await emailjs.send(
+        "service_spgzx8v",
+        "template_2pki9ue",
+        {
+          name: username,
+          phone: phoneNumber,
+          email,
+          title: subject,
+          message,
+          time: new Date().toLocaleString(),
+        },
+        {
+          publicKey: "2uUiCZVa803vwxzoD",
+        }
+      );
+
+      setSuccessMsg(
+        `Thank you dear ${username}, your message has been sent successfully!`
+      );
+      setErrMsg("");
+      setUsername("");
+      setPhoneNumber("");
+      setEmail("");
+      setSubject("");
+      setMessage("");
+    } catch (error) {
+      console.error("FAILED...", error);
+      setSuccessMsg("");
+      setErrMsg("Something went wrong. Please try again.");
     }
   };
 
   return (
-    <section
-      id="contact"
-      className="w-full py-20 border-b-[1px] border-b-black"
-    >
-      <div className="flex justify-center items-center text-center">
-        <Title title="CONTACT" des="Contact With Me" />
-      </div>
-      <div className="w-full">
-        <div className="w-full h-auto flex flex-col lgl:flex-row justify-between">
-          <ContactLeft />
-          <div className="w-full lgl:w-[60%] h-full py-10 bg-gradient-to-r from-[#1e2024] to-[#23272b] flex flex-col gap-8 p-4 lgl:p-8 rounded-lg shadow-shadowOne">
-            <form
-              onSubmit={handleSend}
-              className="w-full flex flex-col gap-4 lgl:gap-6 py-2 lgl:py-5"
-            >
-              {errMsg && (
-                <p className="py-3 bg-gradient-to-r from-[#1e2024] to-[#23272b] shadow-shadowOne text-center text-orange-500 text-base tracking-wide animate-bounce">
-                  {errMsg}
-                </p>
-              )}
-              {successMsg && (
-                <p className="py-3 bg-gradient-to-r from-[#1e2024] to-[#23272b] shadow-shadowOne text-center text-green-500 text-base tracking-wide animate-bounce">
-                  {successMsg}
-                </p>
-              )}
-              <div className="w-full flex flex-col lgl:flex-row gap-10">
-                <div className="w-full lgl:w-1/2 flex flex-col gap-4">
-                  <p className="text-sm text-gray-400 uppercase tracking-wide">
-                    Your name
+    <section id="contact" className="section-shell">
+      <SectionHeading title="Contact" des="Contact With Me" align="center" />
+      <div className="flex flex-col gap-8 lgl:flex-row">
+        <ContactLeft />
+        <Reveal className="w-full lgl:w-[65%]" delay={0.08}>
+          <Card className="h-full">
+            <CardContent className="p-6 lgl:p-8">
+              <form onSubmit={handleSend} className="flex flex-col gap-6">
+                {errMsg && (
+                  <p className="rounded-2xl border border-orange-500/30 bg-orange-500/10 px-4 py-3 text-center text-sm tracking-wide text-orange-300">
+                    {errMsg}
                   </p>
+                )}
+                {successMsg && (
+                  <p className="rounded-2xl border border-green-500/30 bg-green-500/10 px-4 py-3 text-center text-sm tracking-wide text-green-300">
+                    {successMsg}
+                  </p>
+                )}
+
+                <div className="grid gap-6 lgl:grid-cols-2">
+                  <div className="flex flex-col gap-3">
+                    <label className="text-xs font-semibold uppercase tracking-[0.24em] text-gray-400">
+                      Your name
+                    </label>
+                    <input
+                      onChange={(e) => setUsername(e.target.value)}
+                      value={username}
+                      className={contactInputClass(errMsg === "Username is required!")}
+                      type="text"
+                      placeholder="Anthony Decena"
+                    />
+                  </div>
+                  <div className="flex flex-col gap-3">
+                    <label className="text-xs font-semibold uppercase tracking-[0.24em] text-gray-400">
+                      Phone Number
+                    </label>
+                    <input
+                      onChange={(e) => setPhoneNumber(e.target.value)}
+                      value={phoneNumber}
+                      className={contactInputClass(errMsg === "Phone number is required!")}
+                      type="text"
+                      placeholder="+63 900 000 0000"
+                    />
+                  </div>
+                </div>
+
+                <div className="flex flex-col gap-3">
+                  <label className="text-xs font-semibold uppercase tracking-[0.24em] text-gray-400">
+                    Email
+                  </label>
                   <input
-                    onChange={(e) => setUsername(e.target.value)}
-                    value={username}
-                    className={`${
-                      errMsg === "Username is required!" &&
-                      "outline-designColor"
-                    } contactInput`}
-                    type="text"
+                    onChange={(e) => setEmail(e.target.value)}
+                    value={email}
+                    className={contactInputClass(errMsg === "Please give your Email!")}
+                    type="email"
+                    placeholder="you@example.com"
                   />
                 </div>
-                <div className="w-full lgl:w-1/2 flex flex-col gap-4">
-                  <p className="text-sm text-gray-400 uppercase tracking-wide">
-                    Phone Number
-                  </p>
+
+                <div className="flex flex-col gap-3">
+                  <label className="text-xs font-semibold uppercase tracking-[0.24em] text-gray-400">
+                    Subject
+                  </label>
                   <input
-                    onChange={(e) => setPhoneNumber(e.target.value)}
-                    value={phoneNumber}
-                    className={`${
-                      errMsg === "Phone number is required!" &&
-                      "outline-designColor"
-                    } contactInput`}
+                    onChange={(e) => setSubject(e.target.value)}
+                    value={subject}
+                    className={contactInputClass(errMsg === "Please give your Subject!")}
                     type="text"
+                    placeholder="Interview schedule"
                   />
                 </div>
-              </div>
-              <div className="flex flex-col gap-4">
-                <p className="text-sm text-gray-400 uppercase tracking-wide">
-                  Email
-                </p>
-                <input
-                  onChange={(e) => setEmail(e.target.value)}
-                  value={email}
-                  className={`${
-                    errMsg === "Please give your Email!" &&
-                    "outline-designColor"
-                  } contactInput`}
-                  type="email"
-                />
-              </div>
-              <div className="flex flex-col gap-4">
-                <p className="text-sm text-gray-400 uppercase tracking-wide">
-                  Subject
-                </p>
-                <input
-                  onChange={(e) => setSubject(e.target.value)}
-                  value={subject}
-                  className={`${
-                    errMsg === "Please give your Subject!" &&
-                    "outline-designColor"
-                  } contactInput`}
-                  type="text"
-                />
-              </div>
-              <div className="flex flex-col gap-4">
-                <p className="text-sm text-gray-400 uppercase tracking-wide">
-                  Message
-                </p>
-                <textarea
-                  onChange={(e) => setMessage(e.target.value)}
-                  value={message}
-                  className={`${
-                    errMsg === "Message is required!" && "outline-designColor"
-                  } contactTextArea`}
-                  cols="30"
-                  rows="8"
-                ></textarea>
-              </div>
-              <div className="w-full">
-                <button
-                  type="submit"
-                  className="w-full h-12 bg-[#141518] rounded-lg text-base text-gray-400 tracking-wider uppercase hover:text-white duration-300 hover:border-[1px] hover:border-designColor border-transparent"
-                >
+
+                <div className="flex flex-col gap-3">
+                  <label className="text-xs font-semibold uppercase tracking-[0.24em] text-gray-400">
+                    Message
+                  </label>
+                  <textarea
+                    onChange={(e) => setMessage(e.target.value)}
+                    value={message}
+                    className={contactTextAreaClass(errMsg === "Message is required!")}
+                    cols="30"
+                    rows="8"
+                    placeholder="Are you available for interview?"
+                  />
+                </div>
+
+                <Button type="submit" size="lg" className="w-full">
                   Send Message
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
+                </Button>
+              </form>
+            </CardContent>
+          </Card>
+        </Reveal>
       </div>
     </section>
   );
 };
+
+function contactInputClass(isError) {
+  return `${isError ? "border-designColor/60 ring-2 ring-designColor/20" : ""} contactInput`;
+}
+
+function contactTextAreaClass(isError) {
+  return `${isError ? "border-designColor/60 ring-2 ring-designColor/20" : ""} contactTextArea`;
+}
 
 export default Contact;

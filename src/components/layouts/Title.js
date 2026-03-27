@@ -1,14 +1,21 @@
-import React from 'react'
+import React from "react";
+import { Badge } from "../ui/badge";
+import { cn } from "@/lib/utils";
 
-const Title = ({title, des}) => {
+const alignMap = {
+  left: "items-start text-left",
+  center: "items-center text-center",
+};
+
+const Title = ({ title, des, align = "left" }) => {
   return (
-    <div className="flex flex-col gap-4 font-titleFont mb-14">
-      <h3 className="text-sm uppercase font-light text-designColor tracking-wide">
-       {title}
-      </h3>
-      <h1 className="text-4xl md:text-5xl text-gray-300 font-bold capitalize">{des}</h1>
+    <div className={cn("mb-14 flex flex-col gap-5 font-titleFont", alignMap[align])}>
+      <Badge variant="default">{title}</Badge>
+      <h1 className="max-w-3xl text-4xl font-extrabold capitalize leading-tight text-white md:text-5xl">
+        {des}
+      </h1>
     </div>
   );
-}
+};
 
-export default Title
+export default Title;

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-scroll";
 import { useTypewriter, Cursor } from "react-simple-typewriter";
 import {
   FaFacebookF,
@@ -6,88 +7,137 @@ import {
   FaLinkedinIn,
   FaReact,
   FaGithub,
+  FaAws,
 } from "react-icons/fa";
-import { SiTailwindcss, SiFigma, SiSpringboot, SiMicrosoft } from "react-icons/si";
+import { SiTailwindcss, SiSpringboot, SiMongodb } from "react-icons/si";
+import { Badge } from "../ui/badge";
+import { Button, buttonVariants } from "../ui/button";
+import Reveal from "../motion/Reveal";
+import { StaggerGroup, StaggerItem } from "../motion/StaggerGroup";
+import SocialIconButton from "../common/SocialIconButton";
 
 const LeftBanner = () => {
   const [text] = useTypewriter({
-    words: ["Professional Coder.", "Full Stack Developer.", "UI Designer."],
+    words: ["Software Developer.", "Full Stack Developer.", "Backend Developer."],
     loop: true,
-    typeSpeed: 20,
-    deleteSpeed: 10,
-    delaySpeed: 2000,
+    typeSpeed: 38,
+    deleteSpeed: 18,
+    delaySpeed: 1600,
   });
+
+  const socialLinks = [
+    {
+      href: "https://github.com/timdecena",
+      label: "GitHub profile",
+      icon: <FaGithub />,
+    },
+    {
+      href: "https://www.facebook.com/anthony.decena.39",
+      label: "Facebook profile",
+      icon: <FaFacebookF />,
+    },
+    {
+      href: "https://x.com/TimDecena",
+      label: "X profile",
+      icon: <FaTwitter />,
+    },
+    {
+      href: "https://www.linkedin.com/in/anthony-decena/",
+      label: "LinkedIn profile",
+      icon: <FaLinkedinIn />,
+    },
+  ];
+
+  const skills = [<FaReact key="react" />, <SiSpringboot key="spring" />, <SiTailwindcss key="tailwind" />, <SiMongodb key="mongo" />, <FaAws key="aws" />];
+
   return (
-    <div className="w-full lgl:w-1/2 flex flex-col gap-20">
-      <div className="flex flex-col gap-5">
-        <h4 className=" text-lg font-normal">WELCOME TO MY WORLD</h4>
-        <h1 className="text-6xl font-bold text-white">
-          Hi, I'm <span className="text-designColor capitalize">Anthony Decena</span>
-        </h1>
-        <h2 className="text-4xl font-bold text-white">
-          a <span>{text}</span>
-          <Cursor
-            cursorBlinking="false"
-            cursorStyle="|"
-            cursorColor="#ff014f"
-          />
-        </h2>
-        <p className="text-base font-bodyFont leading-6 tracking-wide">
-          I’m a versatile full stack developer and ESL teacher with experience
-           in building modern web and mobile applications. Skilled in Spring Boot, 
-           ASP.NET, React, and TypeScript, I create fast, reliable, and user-friendly solutions. Beyond coding, I bring creativity, problem-solving,
-           and communication skills that make every project impactful.
-        </p>
-      </div>
-      <div className="flex flex-col xl:flex-row gap-6 lgl:gap-0 justify-between">
-        <div>
-          <h2 className="text-base uppercase font-titleFont mb-4">
-            Find me in
-          </h2>
-          <div className="flex gap-4">
-            <a href="https://github.com/timdecena" target="blank">
-              <span className="bannerIcon">
-                <FaGithub />
-              </span>
-            </a>
-            <a href="https://www.facebook.com/anthony.decena.39" target="blank">
-              <span className="bannerIcon">
-                <FaFacebookF />
-              </span>
-            </a>
-            <a href="https://x.com/TimDecena" target="blank">
-              <span className="bannerIcon">
-                <FaTwitter />
-              </span>
-            </a>
-            <a href="https://www.linkedin.com/in/anthony-decena/" target="blank">
-              <span className="bannerIcon">
-                <FaLinkedinIn />
-              </span>
-            </a>
-          </div>
+    <div className="flex w-full flex-col gap-12 lgl:w-1/2">
+      <div className="panel-surface overflow-hidden px-6 py-8 sm:px-8 sm:py-10">
+        <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.07),transparent_30%)]" />
+        <div className="flex flex-col gap-6">
+          <Reveal>
+            <Badge variant="muted">WELCOME TO MY WORLD</Badge>
+          </Reveal>
+          <Reveal delay={0.08}>
+            <h1 className="text-4xl font-extrabold leading-tight text-white sm:text-5xl xl:text-6xl">
+              Hi, I'm <span className="text-designColor">Anthony Decena</span>
+            </h1>
+          </Reveal>
+          <Reveal delay={0.15}>
+            <h2 className="text-2xl font-bold text-white sm:text-3xl xl:text-4xl">
+              a <span>{text}</span>
+              <Cursor
+                cursorBlinking="false"
+                cursorStyle="|"
+                cursorColor="#b88a5a"
+              />
+            </h2>
+          </Reveal>
+          <Reveal delay={0.22}>
+            <p className="max-w-2xl text-base leading-7 text-gray-300">
+              Full Stack Developer with internship experience at Alliance
+              Software Inc., where I contributed to a Tenant Management System
+              using Java, Spring Boot, React, and TypeScript in a microservices
+              architecture. I also worked as a freelance developer with a South
+              Korean team, building a Project Management System with a focus on
+              backend development, unit testing, and RESTful APIs.
+            </p>
+          </Reveal>
+          <Reveal delay={0.28}>
+            <div className="flex flex-wrap items-center gap-4">
+              <Link
+                to="contact"
+                smooth={true}
+                spy={true}
+                offset={-88}
+                duration={500}
+                className={buttonVariants({ size: "lg" })}
+              >
+                Let&apos;s Work Together
+              </Link>
+              <Button asChild variant="outline" size="lg">
+                <a
+                  href="https://github.com/timdecena"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  View GitHub
+                </a>
+              </Button>
+            </div>
+          </Reveal>
         </div>
-        <div>
-          <h2 className="text-base uppercase font-titleFont mb-4">
-            BEST SKILL ON
-          </h2>
-          <div className="flex gap-4">
-            <span className="bannerIcon">
-              <FaReact />
-            </span>
-            <span className="bannerIcon">
-              <SiSpringboot />
-            </span>
-            <span className="bannerIcon">
-              <SiTailwindcss />
-            </span>
-            <span className="bannerIcon">
-              <SiMicrosoft />
-            </span>
-            <span className="bannerIcon">
-              <SiFigma />
-            </span>
-          </div>
+      </div>
+
+      <div className="grid gap-6 xl:grid-cols-[1.1fr_0.9fr]">
+        <div className="panel-surface p-6">
+          <Reveal>
+            <h2 className="mb-5 text-sm font-semibold uppercase tracking-[0.3em] text-gray-400">
+              Find me in
+            </h2>
+          </Reveal>
+          <StaggerGroup className="flex flex-wrap gap-4" stagger={0.1}>
+            {socialLinks.map((item) => (
+              <StaggerItem key={item.label}>
+                <SocialIconButton {...item} />
+              </StaggerItem>
+            ))}
+          </StaggerGroup>
+        </div>
+
+        <div className="panel-surface p-6">
+          <Reveal>
+            <h2 className="mb-5 text-sm font-semibold uppercase tracking-[0.3em] text-gray-400">
+              Best skill on
+            </h2>
+          </Reveal>
+          <StaggerGroup className="flex flex-wrap gap-4" stagger={0.08}>
+            {skills.map((icon, index) => (
+              <StaggerItem key={index}>
+                <span className="bannerIcon">{icon}</span>
+              </StaggerItem>
+            ))}
+          </StaggerGroup>
         </div>
       </div>
     </div>

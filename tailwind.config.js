@@ -1,9 +1,9 @@
 /** @type {import('tailwindcss').Config} */
-module.exports = {
-  content: ["./src/**/*.{js,jsx,ts,tsx}"],
+export default {
+  content: ["./index.html", "./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
-      screens:{
+      screens: {
         xs: "320px",
         sm: "375px",
         sml: "500px",
@@ -18,13 +18,17 @@ module.exports = {
         titleFont: ["Montserrat", "sans-serif"],
       },
       colors: {
-        bodyColor: "#212428",
-        lightText: "#c4cfde",
-        boxBg: "linear-gradient(145deg, #1e2024, #23272b)",
-        designColor: "#ff014f",
+        bodyColor: "#161719",
+        lightText: "#d6d0c7",
+        boxBg: "linear-gradient(145deg, #1a1b1f, #22242a)",
+        designColor: "#b88a5a",
       },
       boxShadow: {
-        shadowOne: "10px 10px 19px #1c1e22, -10px -10px 19px #262a2e",
+        shadowOne: "10px 10px 24px rgba(7, 8, 10, 0.42), -8px -8px 18px rgba(48, 49, 54, 0.16)",
+      },
+      borderRadius: {
+        xl: "1rem",
+        "2xl": "1.5rem",
       },
     },
   },

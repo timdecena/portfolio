@@ -1,29 +1,116 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@layer components{
-    .bannerIcon{
-        @apply w-16 h-16 bg-black bg-opacity-25 text-gray-200 text-xl inline-flex items-center justify-center rounded-md shadow-shadowOne hover:bg-opacity-40 hover:-translate-y-1 transition-all hover:text-designColor cursor-pointer duration-300;
-    }
-    .resumeLi {
-    @apply w-full h-20 bg-black bg-opacity-25 text-xl text-gray-300 flex justify-center cursor-pointer hover:bg-opacity-40 duration-300 items-center border-[1px] rounded-none;
-         }
-.bgOpacity {
-@apply bg-black bg-opacity-40;
-                  }
-    .contactInput{
-        @apply w-full h-12 rounded-lg border-b-[1px] border-b-gray-600 bg-[#191b1e] text-lightText px-4 active:outline-none focus-visible:outline-designColor outline-none focus-visible:border-b-transparent duration-300
-    }
-.contactTextArea{
-    @apply w-full rounded-lg border-b-[1px] border-b-gray-600 bg-[#191b1e] text-lightText px-4 py-2 active:outline-none focus-visible:outline-designColor outline-none focus-visible:border-b-transparent duration-300 resize-none
+@layer base {
+  :root {
+    --background: 30 8% 9%;
+    --foreground: 32 20% 86%;
+    --muted: 30 8% 17%;
+    --muted-foreground: 28 10% 64%;
+    --card: 30 8% 12%;
+    --card-foreground: 32 20% 86%;
+    --popover: 30 8% 11%;
+    --popover-foreground: 32 20% 86%;
+    --border: 28 8% 22%;
+    --input: 28 8% 22%;
+    --primary: 30 40% 54%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 30 8% 18%;
+    --secondary-foreground: 32 20% 86%;
+    --accent: 36 28% 48%;
+    --accent-foreground: 30 8% 10%;
+    --ring: 30 40% 54%;
+    --radius: 1rem;
+  }
+
+  * {
+    @apply border-white/10;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-bodyColor text-lightText antialiased;
+    background-image:
+      radial-gradient(circle at top, rgba(106, 88, 70, 0.16), transparent 30%),
+      linear-gradient(180deg, #111214 0%, #191b1f 40%, #131416 100%);
+    min-height: 100vh;
+    font-family: "Manrope", sans-serif;
+  }
+
+  ::selection {
+    background: rgba(184, 138, 90, 0.28);
+    color: #ffffff;
+  }
 }
+
+@layer components {
+  .panel-surface {
+    @apply rounded-[28px] border shadow-[0_24px_70px_rgba(0,0,0,0.28)] backdrop-blur-xl;
+    border-color: rgba(255, 255, 255, 0.08);
+    background-color: rgba(255, 255, 255, 0.04);
+  }
+
+  .section-shell {
+    @apply w-full border-b py-20;
+    border-bottom-color: rgba(255, 255, 255, 0.06);
+  }
+
+  .bannerIcon {
+    @apply inline-flex h-14 w-14 items-center justify-center rounded-2xl border bg-black/20 text-lg text-gray-200 shadow-shadowOne transition-all duration-300 hover:-translate-y-1 hover:text-designColor;
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .bannerIcon:hover {
+    border-color: rgba(184, 138, 90, 0.55);
+  }
+
+  .resumeLi {
+    @apply flex h-16 w-full cursor-pointer items-center justify-center rounded-2xl border border-transparent text-sm font-semibold uppercase tracking-[0.24em] text-gray-300 transition-all duration-300;
+    background-color: rgba(255, 255, 255, 0.03);
+  }
+
+  .resumeLi:hover {
+    border-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.06);
+  }
+
+  .contactInput {
+    @apply h-12 w-full rounded-2xl border bg-black/20 px-4 text-lightText outline-none transition duration-300 placeholder:text-gray-500 focus:ring-2;
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .contactTextArea {
+    @apply w-full resize-none rounded-2xl border bg-black/20 px-4 py-3 text-lightText outline-none transition duration-300 placeholder:text-gray-500 focus:ring-2;
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .contactInput:focus,
+  .contactTextArea:focus {
+    border-color: rgba(184, 138, 90, 0.55);
+    --tw-ring-color: rgba(184, 138, 90, 0.18);
+  }
+
+  .glass-divider {
+    height: 1px;
+    width: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.1) 50%,
+      transparent 100%
+    );
+  }
 }
 
 .active {
-    color: white;
+  color: white;
 }
-.scrollbar-hide::-webkit-scrollbar{
-    display: none;
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
 }

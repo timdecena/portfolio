@@ -9,9 +9,10 @@ import Resume from "./components/resume/Resume";
 
 function App() {
   return (
-    <div className="w-full h-auto bg-bodyColor text-lightText px-4">
-        <Navbar />
-      <div className="max-w-screen-xl mx-auto">
+    <div className="relative min-h-screen overflow-hidden px-4 text-lightText">
+      <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_left,rgba(184,138,90,0.12),transparent_28%),radial-gradient(circle_at_85%_10%,rgba(120,101,82,0.10),transparent_24%)]" />
+      <Navbar />
+      <div className="mx-auto max-w-screen-xl">
         <Banner />
         <Features />
         <Projects />

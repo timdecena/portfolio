@@ -1,57 +1,56 @@
-import React from 'react'
+import React from "react";
 import { AiFillAppstore } from "react-icons/ai";
-import { FaMobile, FaGlobe } from "react-icons/fa";
-import { SiProgress, SiAntdesign } from "react-icons/si";
-import Title from '../layouts/Title';
-import Card from './Card';
+import { FaMobile, FaServer, FaCodeBranch } from "react-icons/fa";
+import { SiProgress } from "react-icons/si";
+import SectionHeading from "../common/SectionHeading";
+import { StaggerGroup, StaggerItem } from "../motion/StaggerGroup";
+import Card from "./Card";
+
+const featureItems = [
+  {
+    title: "Full Stack Development",
+    des: "I build complete web applications from modern React interfaces to robust backend services and databases.",
+  },
+  {
+    title: "REST API Development",
+    des: "I develop RESTful APIs for business systems using Java, Spring Boot, TypeScript, and clean architectural patterns.",
+    icon: <AiFillAppstore />,
+  },
+  {
+    title: "Cloud Deployment",
+    des: "I work with AWS services, EC2, NGINX, and deployment workflows to keep applications reliable and production ready.",
+    icon: <SiProgress />,
+  },
+  {
+    title: "Backend Systems",
+    des: "I build backend features with microservices, layered architecture, testing, and API-driven development.",
+    icon: <FaServer />,
+  },
+  {
+    title: "Frontend Development",
+    des: "I create responsive user interfaces with React, TypeScript, Tailwind CSS, Bootstrap, and modern component libraries.",
+    icon: <FaMobile />,
+  },
+  {
+    title: "Version Control with Git",
+    des: "I use Git and GitHub to manage code changes, collaborate cleanly, track progress, and keep projects organized.",
+    icon: <FaCodeBranch />,
+  },
+];
 
 const Features = () => {
   return (
-    <section
-      id="features"
-      className="w-full py-20 border-b-[1px] border-b-black"
-    >
-      <Title title="Features" des="What I Do" />
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 xl:gap-20">
-        <Card
-          title="Full Stack Development"
-          des="I build complete web apps, front-end to back-end. 
-          Everything works seamlessly for users."
-         
-        />
-        <Card
-          title="App Development"
-          des="I create apps that are easy to use and solve real problems.
-           I handle the project from start to finish."
-          icon={<AiFillAppstore />}
-        />
-        <Card
-          title="Hosting Websites "
-          des="I get websites online and keep them fast and secure. 
-          You focus on your work, I handle the tech."
-          icon={<SiProgress />}
-        />
-        <Card
-          title="Performance Optimization"
-          des="I speed up websites and apps for smooth use. 
-          Users enjoy faster, efficient performance."
-          icon={<FaMobile />}
-        />
-        <Card
-          title="UI/UX Design"
-          des="I design websites and apps that are clear and user-friendly. 
-          Every detail improves the experience."
-          icon={<SiAntdesign />}
-        />
-        <Card
-          title="ESL Teacher"
-          des="I teach English in a practical, easy way. 
-          Lessons are tailored and interactive."
-          icon={<FaGlobe />}
-        />
-      </div>
+    <section id="features" className="section-shell">
+      <SectionHeading title="Features" des="What I Do" />
+      <StaggerGroup className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3" stagger={0.12}>
+        {featureItems.map((item) => (
+          <StaggerItem key={item.title}>
+            <Card {...item} />
+          </StaggerItem>
+        ))}
+      </StaggerGroup>
     </section>
   );
-}
+};
 
-export default Features
+export default Features;

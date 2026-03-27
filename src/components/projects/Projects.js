@@ -1,57 +1,62 @@
-import React from 'react'
-import Title from '../layouts/Title'
-import { projectOne, projectTwo, projectThree,projectFour,projectFive } from "../../assets/index";
-import ProjectsCard from './ProjectsCard';
+import React from "react";
+import SectionHeading from "../common/SectionHeading";
+import { StaggerGroup, StaggerItem } from "../motion/StaggerGroup";
+import {
+  projectOne,
+  projectTwo,
+  projectThree,
+  projectFour,
+  projectFive,
+} from "../../assets/index";
+import ProjectsCard from "./ProjectsCard";
+
+const projectItems = [
+  {
+    title: "Vocabventure",
+    des: "A gamified learning app for Grade 7 students focused on spelling and vocabulary through interactive challenges. Tech stack: React, TypeScript, Tailwind CSS.",
+    src: projectFour,
+    githubLink: "https://github.com/timdecena/Vocabventure",
+    liveLink: "https://vocabia.duckdns.org/",
+  },
+  {
+    title: "Whiskerwatch",
+    des: "A lost-and-found and pet adoption platform that connects pets with owners and adopters. Tech stack: React, TypeScript, Spring Boot, MySQL.",
+    src: projectOne,
+  },
+  {
+    title: "Sugdone",
+    des: "A task and reminder app that helps users manage to-do lists and stay organized. Tech stack: React, TypeScript, Zustand, Tailwind CSS.",
+    src: projectTwo,
+  },
+  {
+    title: "Sinesugbowatch",
+    des: "A streaming platform inspired by Netflix with a modern and user-friendly interface. Tech stack: React, TypeScript, Tailwind CSS.",
+    src: projectThree,
+  },
+  {
+    title: "Study Buddy",
+    des: "A Django-based platform that connects students with nearby tutors for booking sessions. Tech stack: Django, Python, SQLite.",
+    src: projectFive,
+  },
+];
 
 const Projects = () => {
   return (
-    <section
-  id="projects"
-  className="w-full py-20 border-b-[1px] border-b-black"
->
-  <div className="flex justify-center items-center text-center">
-    <Title
-      title="VISIT MY PORTFOLIO AND KEEP YOUR FEEDBACK"
-      des="My Projects"
-    />
-  </div>
-  <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 xl:gap-14">
-    <ProjectsCard
-  title="Vocabventure"
-  des="A gamified learning app designed for Grade 7 students at CIT, focusing on spelling
-       and vocabulary through fun and interactive challenges."
-  src={projectFour}
-  githubLink="https://github.com/timdecena/Vocabventure"
-  liveLink="https://vocabia.duckdns.org/"
-/>
-    <ProjectsCard
-      title="Whiskerwatch"
-      des="WhiskerWatch is a lost-and-found and pet adoption system that helps connect pets with owners and new families. Users can report lost pets, find adoptable animals, 
-          and stay connected through an easy-to-use platform."
-      src={projectOne}
-    />
-    <ProjectsCard
-      title="Sugdone"
-      des="SugDone is a reminder and to-do app that helps users organize tasks and stay on track. It lets you set reminders, 
-          manage to-do lists, and boost daily productivity with ease."
-      src={projectTwo}
-    />
-    <ProjectsCard
-      title="Sinesugbowatch"
-      des="A streaming platform inspired by Netflix, Sinesugbowatch allows users to explore, watch, 
-          and enjoy a wide variety of movies and shows with a modern and user-friendly interface."
-      src={projectThree}
-    />
-    <ProjectsCard
-      title="Study Buddy"
-      des="A Django-based platform that connects students with nearby tutors, allowing them to book 
-          classes or arrange personal meetups with ease."
-      src={projectFive}
-    />
-  </div>
-</section>
-
+    <section id="projects" className="section-shell">
+      <SectionHeading
+        title="Visit My Portfolio And Keep Your Feedback"
+        des="My Projects"
+        align="center"
+      />
+      <StaggerGroup className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3" stagger={0.12}>
+        {projectItems.map((item) => (
+          <StaggerItem key={item.title}>
+            <ProjectsCard {...item} />
+          </StaggerItem>
+        ))}
+      </StaggerGroup>
+    </section>
   );
-}
+};
 
-export default Projects
+export default Projects;

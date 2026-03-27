@@ -1,70 +1,79 @@
 import React from "react";
-import { motion } from "framer-motion";
+import Reveal from "../motion/Reveal";
+import { StaggerGroup, StaggerItem } from "../motion/StaggerGroup";
 import ResumeCard from "./ResumeCard";
+
+const educationItems = [
+  {
+    title: "B.S Information Technology - May 2026",
+    subTitle: "Cebu Institute of Technology - University",
+    result: "SSG Scholar",
+    des: "Currently completing a BS Information Technology degree with honors while building experience in full stack development, REST APIs, cloud technologies, and software engineering projects.",
+  },
+  {
+    title: "Junior and Senior High School - STEM",
+    subTitle: "Cebu Institute of Technology - University (2016 - 2022)",
+    result: "With Honors",
+    des: "Completed secondary education in the STEM track, building a strong foundation in analytical thinking, technology, and academic performance.",
+  },
+];
+
+const focusItems = [
+  {
+    title: "SSG Scholar",
+    subTitle: "Cebu Institute of Technology - University",
+    result: "2024 - Present",
+    des: "Recognized through the Student Supreme Government Scholarship while pursuing software development work, coursework, and project-based learning.",
+  },
+  {
+    title: "Technical Focus",
+    subTitle: "Full Stack and Backend Development",
+    result: "Ongoing",
+    des: "Focused on Java, C#, Python, SQL, React, TypeScript, JavaScript, Spring Boot, REST APIs, microservices, and cloud-based deployment.",
+  },
+  {
+    title: "Tools and Platforms",
+    subTitle: "Modern Development Workflow",
+    result: "Hands-on",
+    des: "Experienced with VS Code, Git, GitHub, Docker, EC2, NGINX, MySQL Workbench, MongoDB, PostgreSQL, Firebase, and collaborative Kanban-based workflows.",
+  },
+];
 
 const Education = () => {
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1, transition: { duration: 0.5 } }}
-      className="w-full flex flex-col lgl:flex-row gap-10 lgl:gap-20"
-    >
-      {/* part one */}
+    <div className="grid gap-8 lgl:grid-cols-2 lgl:gap-12">
       <div>
-        <div className="py-6 lgl:py-12 font-titleFont flex flex-col gap-4">
-          <p className="text-sm text-designColor tracking-[4px]">2016 - 2026</p>
-          <h2 className="text-3xl md:text-4xl font-bold">Education Quality</h2>
-        </div>
-        <div className="mt-6 lgl:mt-14 w-full h-[1000px] border-l-[6px] border-l-black border-opacity-30 flex flex-col gap-10">
-          <ResumeCard
-            title="Bachelor of Science in Information Technology"
-            subTitle="Cebu Institute of Technology University (2022-2026)"
-            result="Cebu"
-            des="The training provided by universities in order to prepare people to become industry prefered with life ready skills"
-          />
-          <ResumeCard
-            title="Science, Technology, Engineering, and Mathematics"
-            subTitle="Cebu Institute of Technology University (2020-2022)"
-            result="Cebu"
-            des="Senior High School academic strand focused on Science, Technology, Engineering, and Mathematics, providing a strong foundation for college and future careers."
-          />
-          <ResumeCard
-            title="Junior High School"
-            subTitle="Cebu Institute of Technology (2016-2020)"
-            result="Cebu"
-            des="Secondary education or post-primary education covers two phases on the International Standard Classification of Education scale."
-          />
-        </div>
+        <Reveal>
+          <div className="mb-8 space-y-4">
+            <p className="text-sm uppercase tracking-[0.32em] text-designColor">2020 - 2026</p>
+            <h2 className="text-3xl font-bold text-white md:text-4xl">Education Quality</h2>
+          </div>
+        </Reveal>
+        <StaggerGroup className="space-y-6">
+          {educationItems.map((item) => (
+            <StaggerItem key={item.title}>
+              <ResumeCard {...item} />
+            </StaggerItem>
+          ))}
+        </StaggerGroup>
       </div>
-      {/* part Two */}
 
       <div>
-        <div className="py-6 lgl:py-12 font-titleFont flex flex-col gap-4">
-          <p className="text-sm text-designColor tracking-[4px]">2022 - 2025</p>
-          <h2 className="text-3xl md:text-4xl font-bold">Job Experience</h2>
-        </div>
-        <div className="mt-6 lgl:mt-14 w-full h-[1000px] border-l-[6px] border-l-black border-opacity-30 flex flex-col gap-10">
-          <ResumeCard
-            title="Fullstack Developer"
-            subTitle="Lodong South Korean Development Team (June - Aug 2025)"
-            result="Freelance"
-            des="Worked with a South Korean developer team led by CEO Yi Jun Yo, focusing on projects built with Spring Boot and TypeScript. Collaborated on full stack solutions and contributed to high-quality development practices."
-          />
-          <ResumeCard
-            title="ESL Teacher"
-            subTitle="Acadsoc (April - October 2025)"
-            result="Part Time"
-            des="Taught English as a Second Language to international students through Acadsoc. Focused on improving speaking, listening, reading, and writing skills with engaging and interactive lessons."
-          />
-          <ResumeCard
-            title="Service Crew"
-            subTitle="Mc Donalds (January-August 2022)"
-            result="Part Time"
-            des="Worked as a service crew member at McDonald's in Banawa Cebu, providing customer service, preparing orders, and maintaining a clean and efficient work environment."
-          />
-        </div>
+        <Reveal delay={0.08}>
+          <div className="mb-8 space-y-4">
+            <p className="text-sm uppercase tracking-[0.32em] text-designColor">2024 - 2026</p>
+            <h2 className="text-3xl font-bold text-white md:text-4xl">Honors & Focus</h2>
+          </div>
+        </Reveal>
+        <StaggerGroup className="space-y-6" delayChildren={0.08}>
+          {focusItems.map((item) => (
+            <StaggerItem key={item.title}>
+              <ResumeCard {...item} />
+            </StaggerItem>
+          ))}
+        </StaggerGroup>
       </div>
-    </motion.div>
+    </div>
   );
 };
 
